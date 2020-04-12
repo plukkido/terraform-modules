@@ -5,43 +5,45 @@ defaults, autoscaling and autohealing enabled. It uses calico networking
 controller.
 
 # How to use the module
-̢̢```
-module "container_k8s" {
-  source  = "github.com/plukkido/terraform-modules/container-k8s-scw"
+Here is a simple way to use the module with all the defaults.
 
-  name = "test-cluster"
-}
-```
+    module "container_k8s" {
+    source  = "github.com/plukkido/terraform-modules/container-k8s-scw"
+
+    name = "test-cluster"
+    }
+
 
 Alternately, you can alias providers so you can use a different provider config
 for this module.
-̢̢```
-variable "scaleway_access_key" {}
-variable "scaleway_secret_key" {}
-variable "scaleway_org_id" {}
 
-provider "scaleway" {
-    alias = "special"
+    variable "scaleway_access_key" {}
+    variable "scaleway_secret_key" {}
+    variable "scaleway_org_id" {}
 
-    access_key      = var.scaleway_access_key
-    secret_key      = var.scaleway_secret_key
-    organization_id = var.scaleway_org_id
-    region          = "fr-par"
-    zone            = "fr-par-1"
-}
+    provider "scaleway" {
+        alias = "special"
 
-module "container_k8s" {
-  source  = "github.com/plukkido/terraform-modules/container-k8s-scw"
-  providers = {
-      scaleway = "scaleway.special"
-  }
+        access_key      = var.scaleway_access_key
+        secret_key      = var.scaleway_secret_key
+        organization_id = var.scaleway_org_id
+        region          = "fr-par"
+        zone            = "fr-par-1"
+    }
 
-  name = "test-cluster"
-}
-```
+    module "container_k8s" {
+    source  = "github.com/plukkido/terraform-modules/container-k8s-scw"
+    providers = {
+        scaleway = "scaleway.special"
+    }
+
+    name = "test-cluster"
+    }
+
 
 # Known Limitations
-- At the time of writing this module Scaleway Kapsule is only available in the "fr-par" region.
+At the time of writing this module Scaleway Kapsule is only available in the 
+"fr-par" region.
 
 ## Inputs
 ### Required Inputs
