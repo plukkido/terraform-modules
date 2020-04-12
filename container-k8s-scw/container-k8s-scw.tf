@@ -80,3 +80,34 @@ resource "scaleway_k8s_cluster_beta" "cluster" {
     maintenance_window_day = "tuesday"
   }
 }
+
+# ------------------------------------------------------------------------------
+# OUTPUT
+# The outputs for the module
+# ------------------------------------------------------------------------------
+
+output "config" {
+  description = "The Kubernetes kubectl config file contents"
+  value       = scaleway_k8s_cluster_beta.cluster.kubeconfig[0].config_file
+  sensitive   = true
+}
+
+output "host" {
+  description = "The Kubernetes master host"
+  value       = scaleway_k8s_cluster_beta.cluster.kubeconfig[0].host
+  sensitive   = true
+}
+
+output "token" {
+  description = "The Kubernetes secure token"
+  value       = scaleway_k8s_cluster_beta.cluster.kubeconfig[0].token
+  sensitive   = true
+}
+
+output "ca_certificate" {
+  description = "The Kubernetes private CA certificate"
+  value       = base64decode(
+    scaleway_k8s_cluster_beta.cluster.kubeconfig[0].cluster_ca_certificate
+  )
+  sensitive   = true
+}

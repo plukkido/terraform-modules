@@ -45,14 +45,14 @@ for this module.
 At the time of writing this module Scaleway Kapsule is only available in the 
 "fr-par" region.
 
-## Inputs
-### Required Inputs
+# Inputs
+## Required Inputs
 These variables must be set in the module block when using this module.
 
 **name** STRING
 _The name of the cluster_
 
-### Optional Inputs
+## Optional Inputs
 These variables have default values and don't have to be set to use this module.
 You may set these variables to override their default values.
 
